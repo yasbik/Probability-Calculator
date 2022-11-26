@@ -28,6 +28,7 @@ class Hat:
             del self.contents[random_num]
             number_of_draws -= 1
         
+        print("Balls drawn = " + str(balls_drawn))
         return balls_drawn
     
 
@@ -44,19 +45,28 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
             quantity -= 1
     
     length_expected = len(balls_needed)
+
+    print("Needed = " + str(balls_needed))
     
     while num_experiments > 0:
+        print("\nExperiment = " + str(num_experiments))
         balls_drawn = hat.draw(num_balls_drawn)
 
         i = 0
         hit = 0
         while i < length_expected:
-            if balls_needed[i] in balls_needed:
+            print("i = " + str(i) + "          Needed = " + str(balls_needed) + "          Balls drawn = " + str(balls_drawn))
+            print
+            if balls_needed[i] in balls_drawn:
                 del balls_drawn[i]
                 hit += 1
+            print( )
+            i += 1
         
         if hit == len(balls_needed):
             matches += 1
+        
+        num_experiments -= 1
     
     return matches / num_experiments
             
