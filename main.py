@@ -14,4 +14,4 @@ print(hat.draw(3))
 # print("Probability:", probability)
 
 # # Run unit tests automatically
-# main(module='test_module', exit=False)
+main(module='test_module', exit=False)

@@ -23,7 +23,7 @@ class Hat:
             return balls_drawn
         
         while number_of_draws > 0:
-            random_num = random.randint(0, (number_of_draws - 1))
+            random_num = random.randint(0, (len(self.contents) - 1))
             balls_drawn.append(self.contents[random_num])
             del self.contents[random_num]
             number_of_draws -= 1
@@ -32,4 +32,32 @@ class Hat:
     
 
 
-#def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
+def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
+
+    balls_needed = list()
+    balls_drawn = list()
+    matches = 0
+
+    for ball, quantity in expected_balls.items():
+        while quantity > 0:
+            balls_needed.append(ball)
+            quantity -= 1
+    
+    length_expected = len(balls_needed)
+    
+    while num_experiments > 0:
+        balls_drawn = hat.draw(num_balls_drawn)
+
+        i = 0
+        hit = 0
+        while i < length_expected:
+            if balls_needed[i] in balls_needed:
+                del balls_drawn[i]
+                hit += 1
+        
+        if hit == len(balls_needed):
+            matches += 1
+    
+    return matches / num_experiments
+            
+
